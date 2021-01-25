@@ -2,8 +2,13 @@ package com.nuestratienda.admin
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.CrudRepository
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import java.net.URI
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -21,6 +26,14 @@ class SaludoController @Autowired constructor(
     @GetMapping("/saludos")
     fun saludos() : Iterable<Saludo> {
         return saludos
+    }
+
+    @PostMapping("/guardar")
+    fun guardar(@RequestBody saludo: Saludo) : ResponseEntity<Any> {
+        if (repositoty.existsById(saludo.id))
+            return ResponseEntity(HttpStatus.CONFLICT)
+        repositoty.save(saludo)
+        return ResponseEntity.created( URI("/api/" + saludo.id)).body("")
     }
 }
 
