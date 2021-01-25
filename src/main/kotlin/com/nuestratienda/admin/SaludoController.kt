@@ -28,6 +28,11 @@ class SaludoController @Autowired constructor(
         return saludos
     }
 
+    @GetMapping("/listar" )
+    fun listar() : ResponseEntity<Any> {
+        return ResponseEntity.created(URI("/api/")).body(repositoty.findAll())
+    }
+
     @PostMapping("/guardar")
     fun guardar(@RequestBody saludo: Saludo) : ResponseEntity<Any> {
         if (repositoty.existsById(saludo.id))
@@ -35,6 +40,8 @@ class SaludoController @Autowired constructor(
         repositoty.save(saludo)
         return ResponseEntity.created( URI("/api/" + saludo.id)).body("")
     }
+
+
 }
 
 @Entity
