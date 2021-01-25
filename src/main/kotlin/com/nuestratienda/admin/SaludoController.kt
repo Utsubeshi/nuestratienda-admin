@@ -29,8 +29,8 @@ class SaludoController @Autowired constructor(
     }
 
     @GetMapping("/listar" )
-    fun listar() : ResponseEntity<Any> {
-        return ResponseEntity.created(URI("/api/")).body(repositoty.findAll())
+    fun listar() : String {
+        return repositoty.findAll().toString()
     }
 
     @PostMapping("/guardar")
