@@ -4,10 +4,7 @@ import com.nuestratienda.admin.model.Vendedor
 import com.nuestratienda.admin.repository.VendedorRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RestController
@@ -20,4 +17,8 @@ class VendedorController @Autowired constructor(
         repository.save(vendedor)
         return ResponseEntity.created(URI("/registro/" + vendedor.id)).body("")
     }
+
+    @GetMapping("/listar",  produces = ["application/json"])
+    fun getAllUsers(): Iterable<Vendedor> = repository.findAll()
+
 }
