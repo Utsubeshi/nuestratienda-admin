@@ -9,7 +9,7 @@ import javax.persistence.Id
 data class Tienda (
     @Id
     @GeneratedValue
-    var id: Long = 0,
+    var idTienda: Long = 0,
 
     @Column
     var nombre: String = "",

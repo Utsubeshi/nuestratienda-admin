@@ -12,7 +12,7 @@ import javax.persistence.Id
 class Suscripcion (
     @Id
     @GeneratedValue
-    var id: Long = 0,
+    var idSuscripcion: Long = 0,
 
     @Column
     var token: String = "",
