@@ -20,13 +20,11 @@ data class Vendedor (
     @Column
     var correo: String = "",
 
-    @OneToOne(mappedBy = "post",
-        orphanRemoval = true,cascade = arrayOf(CascadeType.ALL))
+    @OneToOne(cascade = arrayOf(CascadeType.ALL))
     @JoinColumn(name = "idTienda")
     var tienda: Tienda = Tienda(),
 
-    @OneToOne(mappedBy = "post",
-        orphanRemoval = true,cascade = arrayOf(CascadeType.ALL))
+    @OneToOne(cascade = arrayOf(CascadeType.ALL))
     @JoinColumn(name = "idSuscripcion")
     var suscripcion: Suscripcion = Suscripcion()
     ) { }
