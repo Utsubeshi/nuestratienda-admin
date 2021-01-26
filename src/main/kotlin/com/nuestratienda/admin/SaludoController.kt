@@ -51,9 +51,7 @@ data class Saludo (
     var id: Long = 0,
     @Column
     var mensaje: String) {
-    constructor() : this() {
 
-    }
 
 }
 interface SaludosRepositoty : CrudRepository<Saludo, Long> {
