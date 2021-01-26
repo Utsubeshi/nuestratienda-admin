@@ -8,7 +8,7 @@ import javax.persistence.*
 @Entity
 class Suscripcion (
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var idSuscripcion: Long = 0,
 
     @Column

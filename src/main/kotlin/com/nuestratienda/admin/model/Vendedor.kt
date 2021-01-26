@@ -5,7 +5,7 @@ import javax.persistence.*
 @Entity
 data class Vendedor (
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
 
     @Column
