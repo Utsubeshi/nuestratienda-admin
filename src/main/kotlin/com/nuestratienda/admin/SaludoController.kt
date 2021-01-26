@@ -3,6 +3,7 @@ package com.nuestratienda.admin
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.CrudRepository
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -28,10 +29,9 @@ class SaludoController @Autowired constructor(
         return saludos
     }
 
-    @GetMapping("/listar" )
-    fun listar() : String {
-        return repositoty.findAll().toString()
-    }
+    @GetMapping("/listar", produces = arrayOf("application/json") )
+    fun listar() = repositoty.findAll().map { it.toString() }
+
 
     @PostMapping("/guardar")
     fun guardar(@RequestBody saludo: Saludo) : ResponseEntity<Any> {
