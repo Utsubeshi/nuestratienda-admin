@@ -5,7 +5,7 @@ import javax.persistence.*
 @Entity
 data class Tienda (
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     var idTienda: Long = 0,
 
     @Column
