@@ -18,7 +18,7 @@ class Suscripcion (
     var token: String = "",
 
     @Column
-    var fechaInicio: LocalDateTime = LocalDateTime.now() ){
+    var fechaInicio: Date = Date() ){
 
 }
 
