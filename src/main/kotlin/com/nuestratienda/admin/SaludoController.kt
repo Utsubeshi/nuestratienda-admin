@@ -19,21 +19,13 @@ import javax.persistence.Id
 class SaludoController @Autowired constructor(
     val repositoty: SaludosRepositoty) {
 
-    val saludos = listOf<Saludo>(Saludo(1,"Hola"), Saludo(2, "Buenas noches"))
-
     @GetMapping("/")
     fun HolaMundo(): String = "Hola!!"
-
-    @GetMapping("/saludos")
-    fun saludos() : Iterable<Saludo> {
-        return saludos
-    }
 
     @GetMapping("/listar", produces = ["application/json"])
     fun listar() : Iterable<Saludo> {
         return repositoty.findAll()
     }
-
 
     @PostMapping("/guardar")
     fun guardar(@RequestBody saludo: Saludo) : ResponseEntity<Any> {
@@ -42,8 +34,6 @@ class SaludoController @Autowired constructor(
         repositoty.save(saludo)
         return ResponseEntity.created( URI("/api/" + saludo.id)).body("")
     }
-
-
 }
 
 @Entity
@@ -52,9 +42,7 @@ data class Saludo (
     @GeneratedValue
     var id: Long = 0,
     @Column
-    var mensaje: String = "") {
+    var mensaje: String = "") {}
 
-
-}
 interface SaludosRepositoty : CrudRepository<Saludo, Long> {
 }
