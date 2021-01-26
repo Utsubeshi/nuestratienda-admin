@@ -50,7 +50,7 @@ data class Saludo (
     @GeneratedValue
     var id: Long = 0,
     @Column
-    var mensaje: String) {
+    var mensaje: String = "") {
 
 
 }
