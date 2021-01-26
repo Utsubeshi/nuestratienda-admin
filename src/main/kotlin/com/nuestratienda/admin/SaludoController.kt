@@ -29,8 +29,10 @@ class SaludoController @Autowired constructor(
         return saludos
     }
 
-    @GetMapping("/listar", produces = arrayOf("application/json") )
-    fun listar() = repositoty.findAll().map { it.toString() }
+    @GetMapping("/listar", produces = ["application/json"])
+    fun listar() : Iterable<Saludo> {
+        return repositoty.findAll()
+    }
 
 
     @PostMapping("/guardar")
