@@ -3,15 +3,12 @@ package com.nuestratienda.admin.model
 import java.text.DateFormat
 import java.time.LocalDateTime
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class Suscripcion (
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     var idSuscripcion: Long = 0,
 
     @Column
