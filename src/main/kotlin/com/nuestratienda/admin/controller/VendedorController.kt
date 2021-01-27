@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RestController
+@CrossOrigin(origins = arrayOf("*"), methods= arrayOf(RequestMethod.GET, RequestMethod.POST))
 @RequestMapping("vendedores")
 class VendedorController @Autowired constructor(
     val repository: VendedorRepository ) {
