@@ -9,7 +9,7 @@ import java.net.URI
 
 @RestController
 @CrossOrigin(origins = arrayOf("*"), methods= arrayOf(RequestMethod.GET, RequestMethod.POST))
-@RequestMapping("vendedores")
+@RequestMapping("/api")
 class VendedorController @Autowired constructor(
     val repository: VendedorRepository ) {
 
