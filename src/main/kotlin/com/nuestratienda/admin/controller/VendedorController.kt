@@ -13,21 +13,11 @@ import java.net.URI
 @CrossOrigin(origins = arrayOf("*"), methods= arrayOf(RequestMethod.GET, RequestMethod.POST))
 @RequestMapping("/api/vendedor")
 class VendedorController @Autowired constructor(
-    //val repository: VendedorRepository
     val service: VendedorService) {
-
-//    @PostMapping("/registro")
-//    fun saveNewUser(@RequestBody vendedor: Vendedor) : ResponseEntity<Any> {
-//        repository.save(vendedor)
-//        return ResponseEntity.created(URI("/registro/" + vendedor.id)).body("")
-//    }
 
     @PostMapping("/registro")
     fun saveNewUser(@RequestBody vendedor: Vendedor): ResponseEntity<String> {
         return ResponseEntity<String>(service.saveNewUser(vendedor), HttpStatus.OK)
     }
-
-//    @GetMapping("/listar",  produces = ["application/json"])
-//    fun getAllUsers(): Iterable<Vendedor> = repository.findAll()
 
 }
