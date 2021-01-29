@@ -23,6 +23,7 @@ class WebSecurity (
     override fun configure(http: HttpSecurity) {
         http
             .cors().and()
+            .csrf().disable()
             .authorizeRequests()
             .antMatchers(SIGN_UP_URL).permitAll()
             .anyRequest().authenticated()
