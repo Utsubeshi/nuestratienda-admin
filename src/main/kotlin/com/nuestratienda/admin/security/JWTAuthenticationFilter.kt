@@ -67,5 +67,5 @@ object SecurityConstants {
     const val EXPIRATION_TIME: Long = 900000 // 15 mins
     const val TOKEN_PREFIX = "Bearer "
     const val HEADER_STRING = "Authorization"
-    const val SIGN_UP_URL = "/usuarios/registro"
+    const val SIGN_UP_URL = "/api/vendedor/registro"
 }

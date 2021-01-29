@@ -1,5 +1,6 @@
 package com.nuestratienda.admin.security
 
+import com.nuestratienda.admin.security.SecurityConstants.SIGN_UP_URL
 import com.nuestratienda.admin.service.VendedorService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -23,7 +24,7 @@ class WebSecurity (
         http
             .cors().and()
             .authorizeRequests()
-            .antMatchers("/api/vendedor/registro").permitAll()
+            .antMatchers(SIGN_UP_URL).permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilter(JWTAuthenticationFilter(authenticationManager()))
