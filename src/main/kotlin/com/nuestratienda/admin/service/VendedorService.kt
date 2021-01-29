@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class VendedorService (
+open class VendedorService (
     var bCryptPasswordEncoder: BCryptPasswordEncoder,
     var repository: VendedorRepository
         ) : UserDetailsService{
@@ -22,7 +22,7 @@ class VendedorService (
     }
 
     @Transactional
-    fun saveNewUser(vendedor: Vendedor): String {
+    open fun saveNewUser(vendedor: Vendedor): String {
         vendedor.password = bCryptPasswordEncoder
             .encode(vendedor.password)
         return repository.save(vendedor).id.toString()

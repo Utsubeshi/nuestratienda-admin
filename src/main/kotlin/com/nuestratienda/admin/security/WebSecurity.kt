@@ -16,7 +16,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
 @EnableWebSecurity
-class WebSecurity (
+open class WebSecurity (
     val vendedorService: VendedorService,
     val bCryptPasswordEncoder: BCryptPasswordEncoder): WebSecurityConfigurerAdapter() {
 
@@ -38,7 +38,7 @@ class WebSecurity (
     }
 
     @Bean
-    fun corsConfigurationSource(): CorsConfigurationSource {
+    open fun corsConfigurationSource(): CorsConfigurationSource {
         val source = UrlBasedCorsConfigurationSource()
         val corsConfiguration = CorsConfiguration()
             .applyPermitDefaultValues()

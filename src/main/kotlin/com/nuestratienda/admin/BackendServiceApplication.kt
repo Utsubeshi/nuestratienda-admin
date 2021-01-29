@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class BackendServiceApplication
+open class BackendServiceApplication
 
 fun main(args: Array<String>) {
     runApplication<BackendServiceApplication>(*args)

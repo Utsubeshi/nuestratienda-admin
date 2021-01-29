@@ -53,6 +53,7 @@ class JWTAuthenticationFilter (
             .withExpiresAt(Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .sign(Algorithm.HMAC512(SECRET.toByteArray()))
         val body: String = (authResult.getPrincipal() as Vendedor).correo.toString() + " " + token
+        response.contentType = "application/json"
         response.writer.write(body)
         response.writer.flush()
     }
