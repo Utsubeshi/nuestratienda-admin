@@ -10,16 +10,16 @@ data class Vendedor (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
 
-    @Column
+    @Column(nullable = false)
     var nombres: String = "",
 
-    @Column
+    @Column(nullable = false)
     var apellidos: String = "",
 
-    @Column
+    @Column(nullable = false)
     private var password: String = "",
 
-    @Column
+    @Column(unique = true, nullable = false)
     var correo: String = "",
 
     @OneToOne(cascade = arrayOf(CascadeType.PERSIST))

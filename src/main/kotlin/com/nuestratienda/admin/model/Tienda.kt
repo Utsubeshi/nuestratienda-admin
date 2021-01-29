@@ -12,6 +12,18 @@ data class Tienda (
     var nombre: String = "",
 
     @Column
-    var detalle: String = ""
+    var detalle: String = "",
+
+    @Column
+    var logoUrl:String = "",
+
+    @Column
+    var direccion: String = "",
+
+    @Column
+    var color1: String = "",
+
+    @Column
+    var color2: String = ""
         ) {
 }
