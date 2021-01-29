@@ -11,11 +11,11 @@ import java.net.URI
 
 @RestController
 //@CrossOrigin(origins = arrayOf("*"), methods= arrayOf(RequestMethod.GET, RequestMethod.POST))
-@RequestMapping("/api/vendedor")
+@RequestMapping("/api/vendedor/registro")
 class VendedorController (
     val service: VendedorService) {
 
-    @PostMapping("/registro")
+    @PostMapping
     fun saveNewUser(@RequestBody vendedor: Vendedor): ResponseEntity<String> {
         return ResponseEntity<String>(service.saveNewUser(vendedor), HttpStatus.OK)
     }
