@@ -5,17 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-open class BackendServiceApplication
+class BackendServiceApplication
 
 fun main(args: Array<String>) {
     runApplication<BackendServiceApplication>(*args)
 }
 
-//@RestController
-//class HolaMundo {
-//    @GetMapping("/")
-//    fun Saludo(): String = "Hola"
-//
-//}
 
 

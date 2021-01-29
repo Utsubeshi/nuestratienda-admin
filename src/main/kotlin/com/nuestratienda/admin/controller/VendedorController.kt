@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RestController
-@CrossOrigin(origins = arrayOf("*"), methods= arrayOf(RequestMethod.GET, RequestMethod.POST))
+//@CrossOrigin(origins = arrayOf("*"), methods= arrayOf(RequestMethod.GET, RequestMethod.POST))
 @RequestMapping("/api/vendedor")
-class VendedorController @Autowired constructor(
+class VendedorController (
     val service: VendedorService) {
 
     @PostMapping("/registro")
