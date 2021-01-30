@@ -25,7 +25,7 @@ open class VendedorService (
     @Transactional
     open fun saveNewUser(vendedor: Vendedor): String {
         val v: Vendedor= repository.findByCorreo(vendedor.correo)
-        if (v.username.isNotEmpty()) return "El correo ya esta registrado"
+        if (v.correo.isNotEmpty()) return "El correo ya esta registrado"
         //TODO Registrar pago
         //var token: String = vendedor.suscripcion.token
         vendedor.password = bCryptPasswordEncoder
