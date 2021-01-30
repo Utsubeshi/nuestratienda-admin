@@ -15,7 +15,7 @@ import java.net.URI
 class VendedorController (
     val service: VendedorService) {
 
-    @PostMapping
+    @PostMapping(produces = arrayOf("application/json"))
     fun saveNewUser(@RequestBody vendedor: Vendedor): ResponseEntity<String> {
         return ResponseEntity<String>(service.saveNewUser(vendedor), HttpStatus.OK)
     }

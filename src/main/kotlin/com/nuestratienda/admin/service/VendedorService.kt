@@ -1,5 +1,6 @@
 package com.nuestratienda.admin.service
 
+import com.nuestratienda.admin.model.Suscripcion
 import com.nuestratienda.admin.model.Vendedor
 import com.nuestratienda.admin.repository.VendedorRepository
 import org.springframework.security.core.userdetails.UserDetails
@@ -23,6 +24,10 @@ open class VendedorService (
 
     @Transactional
     open fun saveNewUser(vendedor: Vendedor): String {
+        val v: Vendedor= repository.findByCorreo(vendedor.correo)
+        if (v.username.isNotEmpty()) return "El correo ya esta registrado"
+        //TODO Registrar pago
+        //var token: String = vendedor.suscripcion.token
         vendedor.password = bCryptPasswordEncoder
             .encode(vendedor.password)
         return repository.save(vendedor).id.toString()
