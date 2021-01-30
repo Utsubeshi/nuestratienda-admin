@@ -1,5 +1,7 @@
 package com.nuestratienda.admin.service
 
+import com.google.gson.Gson
+import com.nuestratienda.admin.model.PaymentDetails
 import com.nuestratienda.admin.model.Suscripcion
 import com.nuestratienda.admin.model.Vendedor
 import com.nuestratienda.admin.repository.VendedorRepository
@@ -13,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 open class VendedorService (
     var bCryptPasswordEncoder: BCryptPasswordEncoder,
-    var repository: VendedorRepository
+    var repository: VendedorRepository,
+    val culqiAPI: CulqiAPI
         ) : UserDetailsService{
 
     override fun loadUserByUsername(email: String?): UserDetails {
@@ -28,9 +31,26 @@ open class VendedorService (
         return if (v != null){
             "El correo ya esta registrado"
         } else {
+            newUserPayment(vendedor)
             vendedor.password = bCryptPasswordEncoder
                 .encode(vendedor.password)
             repository.save(vendedor).id.toString()
         }
     }
+
+    fun newUserPayment(vendedor: Vendedor): Map<String, Any> {
+        val payment = PaymentDetails(
+            amount = "39900",
+            currency_code = "PEN",
+            email = vendedor.correo,
+            source_id = vendedor.suscripcion.token)
+        val response = culqiAPI.getPayment(payment)
+        var map: Map<String, Any> = HashMap()
+        map = Gson().fromJson(response, map.javaClass)
+        print(map)
+        return map
+
+    }
+
+
 }
