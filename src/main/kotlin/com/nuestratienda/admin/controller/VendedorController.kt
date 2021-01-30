@@ -17,7 +17,9 @@ class VendedorController (
 
     @PostMapping(produces = arrayOf("application/json"))
     fun saveNewUser(@RequestBody vendedor: Vendedor): ResponseEntity<Any> {
-        return ResponseEntity<Any>(service.saveNewUser(vendedor), HttpStatus.OK)
+        val mensaje: MutableMap<String, String> = HashMap()
+        mensaje.put("mensaje", service.saveNewUser(vendedor))
+        return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
 
 }
