@@ -28,17 +28,20 @@ open class VendedorService (
     @Transactional
     open fun saveNewUser(vendedor: Vendedor): String {
         val v: Vendedor? = repository.findByCorreo(vendedor.correo)
-        return if (v != null){
-            "El correo ya esta registrado"
+        if (v != null){
+            return "El correo ya esta registrado"
         } else {
-            newUserPayment(vendedor)
-            vendedor.password = bCryptPasswordEncoder
-                .encode(vendedor.password)
-            repository.save(vendedor).id.toString()
+            val apiResponse = newUserPayment(vendedor)
+            if (apiResponse.isSuccessful) {
+                vendedor.password = bCryptPasswordEncoder
+                    .encode(vendedor.password)
+                return repository.save(vendedor).id.toString()
+            }
+            return  apiResponse.toString()
         }
     }
 
-    fun newUserPayment(vendedor: Vendedor): Map<String, Any> {
+    fun newUserPayment(vendedor: Vendedor): RespuestaCulqui {
         val payment = PaymentDetails(
             amount = "39900",
             currency_code = "PEN",
@@ -47,10 +50,22 @@ open class VendedorService (
         val response = culqiAPI.getPayment(payment)
         var map: Map<String, Any> = HashMap()
         map = Gson().fromJson(response, map.javaClass)
-        print(map)
-        return map
-
+        val respuestaCulqui = RespuestaCulqui()
+        if (map["object"] == "error") {
+            respuestaCulqui.mensaje = map["user_message"].toString()
+        } else {
+            respuestaCulqui.isSuccessful = true
+            respuestaCulqui.mensaje = "Se efectuo el pago con exito."
+        }
+        return respuestaCulqui
     }
 
 
+
 }
+
+class RespuestaCulqui(
+    var isSuccessful: Boolean = false,
+    var mensaje: String = "",
+    var id: String = ""
+){}
