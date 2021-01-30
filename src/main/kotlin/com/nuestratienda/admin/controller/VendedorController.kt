@@ -16,8 +16,8 @@ class VendedorController (
     val service: VendedorService) {
 
     @PostMapping(produces = arrayOf("application/json"))
-    fun saveNewUser(@RequestBody vendedor: Vendedor): ResponseEntity<String> {
-        return ResponseEntity<String>(service.saveNewUser(vendedor), HttpStatus.OK)
+    fun saveNewUser(@RequestBody vendedor: Vendedor): ResponseEntity<Any> {
+        return ResponseEntity<Any>(service.saveNewUser(vendedor), HttpStatus.OK)
     }
 
 }
