@@ -12,9 +12,9 @@ class TiendaController (
     var service: TiendaService
         ) {
 
-    @PostMapping("/actualizar")
-    fun update(@RequestBody tienda: Tienda) {
-        //TODO
+    @PostMapping("/actualizar", produces = arrayOf("application/json"))
+    fun update(@RequestBody tienda: Tienda): ResponseEntity<Any> {
+        return ResponseEntity(service.update(tienda), HttpStatus.OK)
     }
 
     @GetMapping("/{idTienda}", produces = arrayOf("application/json"))

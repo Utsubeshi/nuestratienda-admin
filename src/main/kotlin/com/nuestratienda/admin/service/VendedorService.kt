@@ -37,7 +37,7 @@ open class VendedorService (
                     .encode(vendedor.password)
                 return repository.save(vendedor).id.toString()
             }
-            return  apiResponse.toString()
+            return  apiResponse.mensaje
         }
     }
 
