@@ -59,7 +59,7 @@ class JWTAuthenticationFilter (
         map.put("UserID", vendedor)
         //response.writer.write(body)
         response.addHeader("Authorization","Bearer $body")
-        response.writer.write(vendedor)
+        response.writer.write(map.toString())
         response.writer.flush()
     }
 
