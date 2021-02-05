@@ -17,6 +17,7 @@ import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class JWTAuthenticationFilter (
     private val authManager: AuthenticationManager
@@ -53,9 +54,13 @@ class JWTAuthenticationFilter (
             .withExpiresAt(Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .sign(Algorithm.HMAC512(SECRET.toByteArray()))
         val body: String = (authResult.getPrincipal() as Vendedor).correo.toString() + " " + token
+        val vendedor: String = (authResult.getPrincipal() as Vendedor).id.toString()
+        val map: MutableMap<String, String> = HashMap<String, String>()
+        map.put("UserID", vendedor)
         //response.writer.write(body)
         response.addHeader("Authorization","Bearer $body")
-        //response.writer.flush()
+        response.writer.write(vendedor)
+        response.writer.flush()
     }
 
     init {
