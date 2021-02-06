@@ -55,8 +55,8 @@ class JWTAuthenticationFilter (
             .sign(Algorithm.HMAC512(SECRET.toByteArray()))
         val body: String = (authResult.getPrincipal() as Vendedor).correo.toString() + " " + token
         val id: String = (authResult.getPrincipal() as Vendedor).id.toString()
-        //response.writer.write(body)
-        response.addHeader("Authorization","Bearer $body")
+        response.writer.write(body)
+        //response.addHeader("Authorization","Bearer $body")
         response.writer.write("{\"UserID\":\"$id\"}")
         response.writer.flush()
     }
