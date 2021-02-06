@@ -53,11 +53,14 @@ class JWTAuthenticationFilter (
             .withSubject((authResult.getPrincipal() as Vendedor).correo)
             .withExpiresAt(Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .sign(Algorithm.HMAC512(SECRET.toByteArray()))
-        val body: String = (authResult.getPrincipal() as Vendedor).correo.toString() + " " + token
+        //val body: String = (authResult.getPrincipal() as Vendedor).correo.toString() + " " + token
+        val body: String = (authResult.getPrincipal() as Vendedor).correo.toString()
         val id: String = (authResult.getPrincipal() as Vendedor).id.toString()
-        response.writer.write(body)
+        //esponse.writer.write(body)
         //response.addHeader("Authorization","Bearer $body")
-        response.writer.write("{\"UserID\":\"$id\"}")
+        response.writer.write("{\"UserID\":\"$id\"," +
+                "\"correo\":\"$body\"," +
+                "\"token\":\"$token\"}")
         response.writer.flush()
     }
 
