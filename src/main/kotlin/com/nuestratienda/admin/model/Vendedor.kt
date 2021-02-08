@@ -1,5 +1,6 @@
 package com.nuestratienda.admin.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
@@ -31,7 +32,7 @@ data class Vendedor (
     var suscripcion: Suscripcion = Suscripcion()
     ) : UserDetails {
 
-
+    @JsonIgnore
     override fun getPassword(): String = password
 
     fun setPassword(password: String) {
