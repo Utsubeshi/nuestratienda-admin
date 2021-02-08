@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
+import kotlin.collections.HashMap
 
 @Service
 open class VendedorService (
@@ -60,7 +62,7 @@ open class VendedorService (
         return respuestaCulqui
     }
 
-
+    fun getUserById(id: Long): Vendedor = repository.findById(id).get()
 
 }
 

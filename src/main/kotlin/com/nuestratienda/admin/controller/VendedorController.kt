@@ -8,18 +8,23 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
+import javax.websocket.server.PathParam
 
 @RestController
 //@CrossOrigin(origins = arrayOf("*"), methods= arrayOf(RequestMethod.GET, RequestMethod.POST))
-@RequestMapping("/api/vendedor/registro")
+@RequestMapping("/api/vendedor")
 class VendedorController (
     val service: VendedorService) {
 
-    @PostMapping(produces = arrayOf("application/json"))
+    @PostMapping("/registro" , produces = arrayOf("application/json"))
     fun saveNewUser(@RequestBody vendedor: Vendedor): ResponseEntity<Any> {
         val mensaje: MutableMap<String, String> = HashMap()
         mensaje.put("mensaje", service.saveNewUser(vendedor))
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
 
+    @GetMapping( "/{id}", produces = arrayOf("application/json"))
+    fun getUserById(@PathVariable id: Long): ResponseEntity<Any> {
+        return ResponseEntity(service.getUserById(id), HttpStatus.OK)
+    }
 }
