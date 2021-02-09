@@ -62,7 +62,11 @@ open class VendedorService (
         return respuestaCulqui
     }
 
-    fun getUserById(id: Long): Vendedor = repository.findById(id).get()
+    fun getUserById(id: Long): Vendedor {
+        val v = repository.findById(id).get()
+        v.password = ""
+        return v
+    }
 
 }
 
