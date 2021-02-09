@@ -32,7 +32,6 @@ data class Vendedor (
     var suscripcion: Suscripcion = Suscripcion()
     ) : UserDetails {
 
-    @JsonIgnore
     override fun getPassword(): String = password
 
     fun setPassword(password: String) {
