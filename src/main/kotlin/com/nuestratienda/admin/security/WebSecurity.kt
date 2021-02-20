@@ -26,6 +26,7 @@ open class WebSecurity (
             .csrf().disable()
             .authorizeRequests()
             .antMatchers(SIGN_UP_URL).permitAll()
+            .antMatchers("/pusher/auth").permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilter(JWTAuthenticationFilter(authenticationManager()))
