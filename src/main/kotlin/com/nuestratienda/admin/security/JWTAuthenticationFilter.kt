@@ -66,7 +66,7 @@ class JWTAuthenticationFilter (
 
     init {
         setFilterProcessesUrl("/api/vendedor/login")
-        setFilterProcessesUrl("/pusher")
+        setFilterProcessesUrl("/pusher/auth")
     }
 }
 
