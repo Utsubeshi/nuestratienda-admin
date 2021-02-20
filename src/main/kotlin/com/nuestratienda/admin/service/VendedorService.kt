@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.nuestratienda.admin.model.PaymentDetails
 import com.nuestratienda.admin.model.Suscripcion
 import com.nuestratienda.admin.model.Vendedor
+import com.nuestratienda.admin.repository.SuscripcionRepository
 import com.nuestratienda.admin.repository.VendedorRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
@@ -18,6 +19,7 @@ import kotlin.collections.HashMap
 open class VendedorService (
     var bCryptPasswordEncoder: BCryptPasswordEncoder,
     var repository: VendedorRepository,
+    var suscripcionRepository: SuscripcionRepository,
     val culqiAPI: CulqiAPI
         ) : UserDetailsService{
 
@@ -49,6 +51,10 @@ open class VendedorService (
             currency_code = "PEN",
             email = vendedor.correo,
             source_id = vendedor.suscripcion.token)
+        return respuestaCulqui(payment)
+    }
+
+    private fun respuestaCulqui(payment: PaymentDetails): RespuestaCulqui {
         val response = culqiAPI.getPayment(payment)
         var map: Map<String, Any> = HashMap()
         map = Gson().fromJson(response, map.javaClass)
@@ -61,6 +67,27 @@ open class VendedorService (
         }
         return respuestaCulqui
     }
+
+    @Transactional
+    open fun renewSuscripcion (suscripcion: Suscripcion) : String {
+        val apiResponse = paySuscripcion(suscripcion)
+        if (apiResponse.isSuccessful) {
+            suscripcionRepository.save(suscripcion)
+            return "Suscripcion renovada"
+        }
+        return apiResponse.mensaje
+    }
+
+    fun paySuscripcion(suscripcion: Suscripcion): RespuestaCulqui {
+        val payment = PaymentDetails(
+            amount = "39900",
+            currency_code = "PEN",
+            email = "renovacion@nta.com",
+            source_id = suscripcion.token
+        )
+        return respuestaCulqui(payment)
+    }
+
 
     fun getUserById(id: Long): Vendedor {
         val v = repository.findById(id).get()

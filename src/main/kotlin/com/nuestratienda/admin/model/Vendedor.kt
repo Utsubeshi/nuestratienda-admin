@@ -47,10 +47,13 @@ data class Vendedor (
 
     override fun getUsername(): String = correo
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     override fun isAccountNonExpired(): Boolean = true
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     override fun isAccountNonLocked(): Boolean = true
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     override fun isCredentialsNonExpired(): Boolean = true
 
     override fun isEnabled(): Boolean = true

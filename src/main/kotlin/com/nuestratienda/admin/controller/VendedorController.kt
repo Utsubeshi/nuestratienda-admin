@@ -35,4 +35,12 @@ class VendedorController (
     fun getSuscripcion(@PathVariable id: Long): ResponseEntity<Any> {
         return ResponseEntity(suscripcionService.getSuscripcionById(id), HttpStatus.OK)
     }
+
+    @PostMapping("/renovar", produces = arrayOf("application/json"))
+    fun renewSuscripcion(@RequestBody suscripcion: Suscripcion): ResponseEntity<Any>{
+        val mensaje: MutableMap<String, String> = HashMap()
+        mensaje.put("mensaje", service.renewSuscripcion(suscripcion))
+        return ResponseEntity<Any>(mensaje, HttpStatus.OK)
+
+    }
 }
