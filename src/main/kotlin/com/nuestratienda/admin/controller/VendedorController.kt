@@ -41,6 +41,5 @@ class VendedorController (
         val mensaje: MutableMap<String, String> = HashMap()
         mensaje.put("mensaje", service.renewSuscripcion(suscripcion))
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
-
     }
 }
