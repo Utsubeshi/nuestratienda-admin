@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 class PusherController {
 
     @PostMapping("/auth", consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE], produces = ["application/json"])
-    fun update(@RequestBody req: PusherRequest): ResponseEntity<Any> {
+    fun update(req: PusherRequest): ResponseEntity<Any> {
         val pusher = Pusher("1158630", "7357430a418c50d7acec", "0804eeecd910f7bb9c9d")
 
         val socketId = req.socket_id
