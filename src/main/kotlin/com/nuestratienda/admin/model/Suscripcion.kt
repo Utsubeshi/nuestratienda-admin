@@ -15,7 +15,7 @@ class Suscripcion (
     var token: String = "",
 
     @Column
-    var fechaInicio: Date = Date() ){
+    var fechaFin: Date = Date() ){
 
 }
 
