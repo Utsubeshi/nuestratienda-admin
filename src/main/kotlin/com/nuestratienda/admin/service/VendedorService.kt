@@ -90,9 +90,14 @@ open class VendedorService (
 
 
     fun getUserById(id: Long): Vendedor {
-        val v = repository.findById(id).get()
-        v.password = ""
-        return v
+        var vendedor = Vendedor()
+        try {
+            vendedor = repository.findById(id).get()
+            vendedor.password = ""
+        } catch (e: Exception) {
+
+        }
+        return vendedor
     }
 
 }
