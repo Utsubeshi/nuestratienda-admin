@@ -28,6 +28,8 @@ class VendedorController (
 
     @GetMapping( "/{id}", produces = arrayOf("application/json"))
     fun getUserById(@PathVariable id: Long): ResponseEntity<Any> {
+        val vendedor = service.getUserById(id)
+        if (vendedor.correo.isBlank()) return ResponseEntity("Registro no encontrado", HttpStatus.NOT_FOUND)
         return ResponseEntity(service.getUserById(id), HttpStatus.OK)
     }
 
