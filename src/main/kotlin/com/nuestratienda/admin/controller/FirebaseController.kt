@@ -13,7 +13,7 @@ class FirebaseController (
 
     @PostMapping("/guardar", produces = arrayOf("application/json"))
     fun saveFirebaseData(@RequestBody firebase: Firebase): ResponseEntity<Any> {
-        val firebase = service.saveFirebase(firebase) ?: return ResponseEntity("Registro fallido", HttpStatus.NOT_FOUND)
+        val dbFirebase = service.saveFirebase(firebase) ?: return ResponseEntity("Registro fallido", HttpStatus.NOT_FOUND)
         return ResponseEntity(firebase, HttpStatus.OK)
     }
 

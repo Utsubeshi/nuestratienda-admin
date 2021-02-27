@@ -10,7 +10,13 @@ class TiendaService (
 
     fun update(tienda: Tienda) = repository.save(tienda)
 
-    fun getStoreById(idTienda: Long): Tienda? = repository.findByIdTienda(idTienda)
+    fun getStoreById(idTienda: Long): Tienda? {
+        var tienda = Tienda()
+        try {
+            tienda = repository.findByIdTienda(idTienda)!!
+        }catch (e: Exception){ }
+        return tienda
+    }
 
 
 }

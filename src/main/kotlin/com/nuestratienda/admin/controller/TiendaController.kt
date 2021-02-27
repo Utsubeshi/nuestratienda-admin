@@ -21,7 +21,6 @@ class TiendaController (
     fun getStoreById(@PathVariable("idTienda") idTienda: Long) : ResponseEntity<Any> {
         val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity(HttpStatus.NOT_FOUND)
         return ResponseEntity(tienda, HttpStatus.OK)
-
     }
 
 }

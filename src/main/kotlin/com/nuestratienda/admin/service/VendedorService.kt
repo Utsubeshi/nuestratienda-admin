@@ -94,12 +94,9 @@ open class VendedorService (
         try {
             vendedor = repository.findById(id).get()
             vendedor.password = ""
-        } catch (e: Exception) {
-
-        }
+        } catch (e: Exception) { }
         return vendedor
     }
-
 }
 
 class RespuestaCulqui(
