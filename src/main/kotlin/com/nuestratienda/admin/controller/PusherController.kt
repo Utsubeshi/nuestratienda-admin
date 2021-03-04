@@ -20,7 +20,7 @@ class PusherController {
         val socketId = req.socket_id
         val channel = req.channel_name
         val auth = pusher.authenticate(socketId, channel)
-        System.out.println(auth.toString())
+        System.out.println(auth)
         return ResponseEntity(auth, HttpStatus.OK)
     }
 }

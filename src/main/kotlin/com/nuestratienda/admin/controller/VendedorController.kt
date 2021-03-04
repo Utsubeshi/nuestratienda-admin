@@ -44,4 +44,9 @@ class VendedorController (
         mensaje.put("mensaje", service.renewSuscripcion(suscripcion))
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
+
+    @PostMapping("/listar", produces = arrayOf("application/json"))
+    fun getVendedores(): ResponseEntity<Any> {
+        return ResponseEntity(service.getVendedores(), HttpStatus.OK)
+    }
 }

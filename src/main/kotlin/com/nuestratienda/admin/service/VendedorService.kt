@@ -97,6 +97,10 @@ open class VendedorService (
         } catch (e: Exception) { }
         return vendedor
     }
+
+    fun getVendedores(): MutableIterable<Vendedor> {
+        return repository.findAll()
+    }
 }
 
 class RespuestaCulqui(
