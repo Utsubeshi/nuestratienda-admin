@@ -45,7 +45,7 @@ class VendedorController (
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
 
-    @PostMapping("/listar", produces = arrayOf("application/json"))
+    @GetMapping("/listar", produces = arrayOf("application/json"))
     fun getVendedores(): ResponseEntity<Any> {
         return ResponseEntity(service.getVendedores(), HttpStatus.OK)
     }
