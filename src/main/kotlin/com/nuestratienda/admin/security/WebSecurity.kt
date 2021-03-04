@@ -27,6 +27,7 @@ open class WebSecurity (
             .authorizeRequests()
             .antMatchers(SIGN_UP_URL).permitAll()
             .antMatchers("/pusher/auth").permitAll()
+            .antMatchers("/api/vendedor/listar").permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilter(JWTAuthenticationFilter(authenticationManager()))
