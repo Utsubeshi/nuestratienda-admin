@@ -20,6 +20,13 @@ open class WebSecurity (
     val vendedorService: VendedorService,
     val bCryptPasswordEncoder: BCryptPasswordEncoder): WebSecurityConfigurerAdapter() {
 
+    private val AUTH_WHITELIST = arrayOf( // -- swagger ui
+        "/swagger-resources/**",
+        "/swagger-ui.html",
+        "/v2/api-docs",
+        "/webjars/**"
+    )
+
     override fun configure(http: HttpSecurity) {
         http
             .cors().and()
@@ -27,7 +34,7 @@ open class WebSecurity (
             .authorizeRequests()
             .antMatchers(SIGN_UP_URL).permitAll()
             .antMatchers("/pusher/auth").permitAll()
-            .antMatchers( "/v2/api-docs", "/swagger-resources/**", "/configuration/ui","/configuration/security", "/swagger-ui/").permitAll()
+            .antMatchers("/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilter(JWTAuthenticationFilter(authenticationManager()))
