@@ -26,6 +26,7 @@ open class WebSecurity (
             .csrf().disable()
             .authorizeRequests()
             .antMatchers(SIGN_UP_URL).permitAll()
+            .antMatchers("/", "/swagger-ui").permitAll()
             .antMatchers("/pusher/auth").permitAll()
             .antMatchers("/api/vendedor/listar").permitAll()
             .anyRequest().authenticated()
