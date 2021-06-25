@@ -27,7 +27,7 @@ open class WebSecurity (
             .authorizeRequests()
             .antMatchers(SIGN_UP_URL).permitAll()
             .antMatchers("/pusher/auth").permitAll()
-            .antMatchers( "/v2/api-docs", "/swagger-resources/**", "/configuration/ui","/configuration/security", "/swagger-ui.html").permitAll()
+            .antMatchers( "/v2/api-docs", "/swagger-resources/**", "/configuration/ui","/configuration/security", "/swagger-ui/").permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilter(JWTAuthenticationFilter(authenticationManager()))
