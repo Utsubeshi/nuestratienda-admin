@@ -10,9 +10,13 @@ class TiendaService (
 
     fun update(tienda: Tienda) = repository.save(tienda)
 
+//    fun getStoreById(idTienda: Long): Tienda? {
+//       val tienda: Tienda? = repository.findByIdTienda(idTienda)
+//        if (tienda != null) return tienda
+//       return null
+//    }
+
     fun getStoreById(idTienda: Long): Tienda? {
-       val tienda: Tienda? = repository.findByIdTienda(idTienda)
-        if (tienda != null) return tienda
-       return null
+        return repository.findByIdTienda(idTienda)
     }
 }
