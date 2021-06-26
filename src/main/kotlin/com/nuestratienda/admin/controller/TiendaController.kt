@@ -6,9 +6,9 @@ import com.nuestratienda.admin.service.TiendaService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 import org.springframework.web.server.ResponseStatusException
-
-
+import java.lang.RuntimeException
 
 
 @RestController
@@ -25,10 +25,9 @@ class TiendaController (
     @GetMapping("/{idTienda}", produces = arrayOf("application/json"))
     fun getStoreById(@PathVariable("idTienda") idTienda: Long) : ResponseEntity<Any> {
         try {
-//            val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
-//            return ResponseEntity(tienda, HttpStatus.OK)
-            throw ApiRequestException("oops")
-        } catch (exception: ApiRequestException) {
+            val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
+            return ResponseEntity(tienda, HttpStatus.OK)
+        } catch (ex: MethodArgumentTypeMismatchException) {
             throw ApiRequestException("oops")
         }
 
