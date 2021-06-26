@@ -20,13 +20,6 @@ open class WebSecurity (
     val vendedorService: VendedorService,
     val bCryptPasswordEncoder: BCryptPasswordEncoder): WebSecurityConfigurerAdapter() {
 
-    private val AUTH_WHITELIST = arrayOf( // -- swagger ui
-        "/swagger-resources/**",
-        "/swagger-ui.html",
-        "/v2/api-docs",
-        "/webjars/**"
-    )
-
     override fun configure(http: HttpSecurity) {
         http
             .cors().and()
