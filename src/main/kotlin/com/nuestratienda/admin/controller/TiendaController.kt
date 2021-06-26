@@ -26,8 +26,7 @@ class TiendaController (
 //            val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
 //            return ResponseEntity(tienda, HttpStatus.OK)
         try {
-            val tienda: Tienda? = service.getStoreById(idTienda)
-           return ResponseEntity(tienda, HttpStatus.OK)
+            return ResponseEntity(service.getStoreById(idTienda), HttpStatus.OK)
         } catch (ex: TiendaException) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, "No hay registro", ex)
         }
