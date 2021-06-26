@@ -5,6 +5,10 @@ import com.nuestratienda.admin.service.TiendaService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
+
+
+
 
 @RestController
 @RequestMapping("/api/tienda")
@@ -19,8 +23,14 @@ class TiendaController (
 
     @GetMapping("/{idTienda}", produces = arrayOf("application/json"))
     fun getStoreById(@PathVariable("idTienda") idTienda: Long) : ResponseEntity<Any> {
-        val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
-        return ResponseEntity(tienda, HttpStatus.OK)
+        try {
+            val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
+            return ResponseEntity(tienda, HttpStatus.OK)
+        }catch ( exc: TiendaNotFoundException) {
+            throw ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Registro no encontrado", exc
+            )
+        }
     }
 
 }

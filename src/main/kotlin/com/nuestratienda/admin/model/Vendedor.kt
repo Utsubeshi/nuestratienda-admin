@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
+import javax.validation.constraints.Email
 
 @Entity
 data class Vendedor (
@@ -22,6 +23,7 @@ data class Vendedor (
     private var password: String = "",
 
     @Column(unique = true, nullable = false)
+    @Email
     var correo: String = "",
 
     @OneToOne(cascade = arrayOf(CascadeType.PERSIST))

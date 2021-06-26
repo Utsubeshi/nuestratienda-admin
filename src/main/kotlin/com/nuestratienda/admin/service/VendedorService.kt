@@ -3,6 +3,7 @@ package com.nuestratienda.admin.service
 import com.google.gson.Gson
 import com.nuestratienda.admin.model.PaymentDetails
 import com.nuestratienda.admin.model.Suscripcion
+import com.nuestratienda.admin.model.Tienda
 import com.nuestratienda.admin.model.Vendedor
 import com.nuestratienda.admin.repository.SuscripcionRepository
 import com.nuestratienda.admin.repository.VendedorRepository
@@ -101,6 +102,8 @@ open class VendedorService (
     fun getVendedores(): MutableIterable<Vendedor> {
         return repository.findAll()
     }
+
+    fun update(vendedor: Vendedor) = repository.save(vendedor)
 }
 
 class RespuestaCulqui(
