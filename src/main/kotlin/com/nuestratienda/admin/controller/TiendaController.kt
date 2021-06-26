@@ -1,5 +1,6 @@
 package com.nuestratienda.admin.controller
 
+import com.nuestratienda.admin.controller.exception.ApiRequestException
 import com.nuestratienda.admin.model.Tienda
 import com.nuestratienda.admin.service.TiendaService
 import org.springframework.http.HttpStatus
@@ -23,8 +24,13 @@ class TiendaController (
 
     @GetMapping("/{idTienda}", produces = arrayOf("application/json"))
     fun getStoreById(@PathVariable("idTienda") idTienda: Long) : ResponseEntity<Any> {
-        val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
-        return ResponseEntity(tienda, HttpStatus.OK)
+        try {
+            val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
+            return ResponseEntity(tienda, HttpStatus.OK)
+        } catch (exception: ApiRequestException) {
+            throw ApiRequestException("oops")
+        }
+
     }
 
 }
