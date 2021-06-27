@@ -27,7 +27,7 @@ class TiendaController (
         try {
             val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
             return ResponseEntity(tienda, HttpStatus.OK)
-        } catch (ex: MethodArgumentTypeMismatchException) {
+        } catch (ex: NullPointerException) {
             throw ApiRequestException("oops")
         }
 
