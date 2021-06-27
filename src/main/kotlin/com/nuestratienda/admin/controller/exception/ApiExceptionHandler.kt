@@ -11,8 +11,8 @@ import java.time.ZonedDateTime
 @ControllerAdvice
 class ApiExceptionHandler {
 
-    @ExceptionHandler(value = [ApiRequestException::class])
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = [Exception::class])
+    //@ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handler(exception: ApiRequestException) : ResponseEntity<Any> {
         val status = HttpStatus.BAD_REQUEST
         val apiException = ApiException(
