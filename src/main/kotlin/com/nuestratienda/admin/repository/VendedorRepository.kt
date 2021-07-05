@@ -22,6 +22,6 @@ interface VendedorRepository : CrudRepository<Vendedor, Long> {
 
     fun findAllByOrderByIdAsc(): MutableIterable<Vendedor>
 
-    override fun findById (id: Long) : Optional<Vendedor?>
+    override fun findById (id: Long) : Optional<Vendedor>
 }
 
