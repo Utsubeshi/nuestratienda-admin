@@ -47,6 +47,9 @@ open class VendedorService (
     }
 
     fun updateUser(vendedor: Vendedor): String {
+        val v =  getUserById(vendedor.id)
+        v.nombres = vendedor.nombres
+        v.apellidos = vendedor.apellidos
         return repository.save(vendedor).toString()
     }
 
