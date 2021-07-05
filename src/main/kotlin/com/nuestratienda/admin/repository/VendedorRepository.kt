@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.query.Param
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Transactional
 interface VendedorRepository : CrudRepository<Vendedor, Long> {
@@ -20,5 +21,7 @@ interface VendedorRepository : CrudRepository<Vendedor, Long> {
                    @Param(value = "id") id: Long)
 
     fun findAllByOrderByIdAsc(): MutableIterable<Vendedor>
+
+    override fun findById (id: Long) : Optional<Vendedor?>
 }
 
