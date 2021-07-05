@@ -33,11 +33,11 @@ data class Vendedor (
     @Email
     var correo: String = "",
 
-    @OneToOne(cascade = arrayOf(CascadeType.PERSIST))
+    @OneToOne(cascade = arrayOf(CascadeType.MERGE))
     @JoinColumn(name = "idTienda")
     var tienda: Tienda = Tienda(),
 
-    @OneToOne(cascade = arrayOf(CascadeType.PERSIST))
+    @OneToOne(cascade = arrayOf(CascadeType.MERGE))
     @JoinColumn(name = "idSuscripcion")
     var suscripcion: Suscripcion = Suscripcion()
     ) : UserDetails {
