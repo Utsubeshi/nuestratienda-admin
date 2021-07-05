@@ -46,6 +46,10 @@ open class VendedorService (
         }
     }
 
+    fun updateUser(vendedor: Vendedor): String {
+        return repository.save(vendedor).toString()
+    }
+
     fun newUserPayment(vendedor: Vendedor): RespuestaCulqui {
         val payment = PaymentDetails(
             amount = "39900",
