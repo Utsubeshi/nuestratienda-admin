@@ -49,4 +49,11 @@ class VendedorController (
     fun getVendedores(): ResponseEntity<Any> {
         return ResponseEntity(service.getVendedores(), HttpStatus.OK)
     }
+
+    @PostMapping("/actualizar")
+    fun updateVendedor(@RequestBody vendedor: Vendedor): ResponseEntity<Any> {
+        val mensaje: MutableMap<String, String> = HashMap()
+        mensaje.put("mensaje", service.saveNewUser(vendedor))
+        return ResponseEntity<Any>(mensaje, HttpStatus.OK)
+    }
 }
