@@ -7,6 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc
 
 @Configuration
 open class AppConfiguration {
+    
     @Bean
     open fun bCryptPasswordEncoder(): BCryptPasswordEncoder = BCryptPasswordEncoder()
 }

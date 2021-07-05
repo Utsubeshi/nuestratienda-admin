@@ -2,6 +2,7 @@ package com.nuestratienda.admin.controller.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -11,7 +12,7 @@ import java.time.ZonedDateTime
 @ControllerAdvice
 class ApiExceptionHandler {
 
-    @ExceptionHandler(value = [Exception::class])
+    @ExceptionHandler(value = [Exception::class, HttpMessageNotReadableException::class])
     //@ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handler(exception: ApiException) : ResponseEntity<Any> {
         //val status = exception.httpStatus

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*
 import java.net.URI
 import javax.validation.Valid
 import javax.websocket.server.PathParam
+import kotlin.jvm.Throws
 
 @RestController
 //@CrossOrigin(origins = arrayOf("*"), methods= arrayOf(RequestMethod.GET, RequestMethod.POST))
@@ -27,6 +28,7 @@ class VendedorController (
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
 
+    @ExceptionHandler
     @GetMapping( "/{id}", produces = arrayOf("application/json"))
     fun getUserById(@PathVariable id: Long): ResponseEntity<Any> {
         val vendedor = service.getUserById(id)
