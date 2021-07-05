@@ -1,12 +1,14 @@
 package com.nuestratienda.admin.service
 
 import com.google.gson.Gson
+import com.nuestratienda.admin.controller.exception.ApiException
 import com.nuestratienda.admin.model.PaymentDetails
 import com.nuestratienda.admin.model.Suscripcion
 import com.nuestratienda.admin.model.Tienda
 import com.nuestratienda.admin.model.Vendedor
 import com.nuestratienda.admin.repository.SuscripcionRepository
 import com.nuestratienda.admin.repository.VendedorRepository
+import org.springframework.http.HttpStatus
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -48,7 +50,7 @@ open class VendedorService (
 
     fun updateUser(vendedor: Vendedor) {
         val optionalV = repository.findById(vendedor.id)
-        if (!optionalV.isPresent()) return
+        if (!optionalV.isPresent()) throw ApiException("", HttpStatus.NOT_FOUND)
         val v = optionalV.get()
         //if (v.nombres.isBlank()) return
         repository.updateUser(
