@@ -18,6 +18,8 @@ class ApiExceptionHandler {
         val apiException = ApiException(
             exception.message,
             status)
-        return ResponseEntity(apiException, status)
+        val mensaje: MutableMap<String, String> = HashMap()
+        mensaje.put("mensaje", exception.message)
+        return ResponseEntity(mensaje, status)
     }
 }
