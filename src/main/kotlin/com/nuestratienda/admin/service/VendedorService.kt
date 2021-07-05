@@ -2,6 +2,7 @@ package com.nuestratienda.admin.service
 
 import com.google.gson.Gson
 import com.nuestratienda.admin.controller.exception.ApiException
+import com.nuestratienda.admin.controller.exception.UserNotFoundException
 import com.nuestratienda.admin.model.PaymentDetails
 import com.nuestratienda.admin.model.Suscripcion
 import com.nuestratienda.admin.model.Tienda
@@ -50,7 +51,8 @@ open class VendedorService (
 
     fun updateUser(vendedor: Vendedor) {
         val optionalV = repository.findById(vendedor.id)
-        if (!optionalV.isPresent()) throw ApiException("", HttpStatus.NOT_FOUND)
+        //if (!optionalV.isPresent()) throw ApiException("User not found", HttpStatus.NOT_FOUND)
+        if (!optionalV.isPresent()) throw UserNotFoundException()
         val v = optionalV.get()
         //if (v.nombres.isBlank()) return
         repository.updateUser(

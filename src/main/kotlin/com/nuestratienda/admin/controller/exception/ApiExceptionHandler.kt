@@ -14,12 +14,9 @@ class ApiExceptionHandler {
     @ExceptionHandler(value = [Exception::class])
     //@ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handler(exception: ApiException) : ResponseEntity<Any> {
-        val status = exception.httpStatus
-        val apiException = ApiException(
-            exception.message,
-            status)
+        //val status = exception.httpStatus
         val mensaje: MutableMap<String, String> = HashMap()
-        mensaje.put("mensaje", exception.message)
-        return ResponseEntity(mensaje, status)
+        mensaje.put("message", exception.message)
+        return ResponseEntity(mensaje, exception.httpStatus)
     }
 }
