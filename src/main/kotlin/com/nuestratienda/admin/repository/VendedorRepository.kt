@@ -19,7 +19,6 @@ interface VendedorRepository : CrudRepository<Vendedor, Long> {
                    @Param(value = "apellidos") apellidos: String,
                    @Param(value = "id") id: Long)
 
-
     fun findAllByOrderByIdAsc(): MutableIterable<Vendedor>
 }
 
