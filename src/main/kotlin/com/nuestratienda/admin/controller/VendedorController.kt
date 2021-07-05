@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
+import javax.validation.Valid
 import javax.websocket.server.PathParam
 
 @RestController
@@ -51,7 +52,7 @@ class VendedorController (
     }
 
     @PostMapping("/actualizar")
-    fun updateVendedor(@RequestBody vendedor: Vendedor): ResponseEntity<Any> {
+    fun updateVendedor(@Valid @RequestBody vendedor: Vendedor): ResponseEntity<Any> {
         val mensaje: MutableMap<String, String> = HashMap()
         mensaje.put("mensaje", service.updateUser(vendedor))
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)

@@ -2,12 +2,15 @@ package com.nuestratienda.admin.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
+
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
 import javax.validation.constraints.Email
+import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Pattern
+
 
 @Entity
 data class Vendedor (
@@ -16,7 +19,7 @@ data class Vendedor (
     var id: Long = 0,
 
     @Pattern(regexp="[a-zA-Z]")
-    @NotEmpty(message = "Please provide name")
+    @NotBlank(message = "No se introdujo un nombre")
     @Column(nullable = false)
     var nombres: String = "",
 
