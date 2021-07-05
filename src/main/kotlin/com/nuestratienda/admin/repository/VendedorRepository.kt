@@ -1,6 +1,7 @@
 package com.nuestratienda.admin.repository
 
 import com.nuestratienda.admin.model.Vendedor
+import org.hibernate.annotations.OrderBy
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Transactional
 interface VendedorRepository : CrudRepository<Vendedor, Long> {
+
     fun findByCorreo(email: String): Vendedor?
 
     @Modifying
@@ -17,4 +19,7 @@ interface VendedorRepository : CrudRepository<Vendedor, Long> {
                    @Param(value = "apellidos") apellidos: String,
                    @Param(value = "id") id: Long)
 
+
+    fun findAllByOrderByIdAsc(): MutableIterable<Vendedor>
 }
+

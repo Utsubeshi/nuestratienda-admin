@@ -104,7 +104,8 @@ open class VendedorService (
     }
 
     fun getVendedores(): MutableIterable<Vendedor> {
-        return repository.findAll()
+        //val vendodores = repository.findAll()
+        return repository.findAllByOrderByIdAsc()
     }
 
     fun update(vendedor: Vendedor) = repository.save(vendedor)
