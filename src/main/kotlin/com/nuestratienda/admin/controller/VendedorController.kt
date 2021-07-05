@@ -55,6 +55,7 @@ class VendedorController (
     fun updateVendedor(@RequestBody vendedor: Vendedor): ResponseEntity<Any> {
         val mensaje: MutableMap<String, String> = HashMap()
         //mensaje.put("mensaje", service.updateUser(vendedor))
+        println(vendedor.toString())
         service.updateUser(vendedor)
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
