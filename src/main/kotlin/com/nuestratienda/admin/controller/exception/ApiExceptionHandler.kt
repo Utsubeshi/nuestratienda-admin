@@ -17,9 +17,7 @@ class ApiExceptionHandler {
         val status = HttpStatus.BAD_REQUEST
         val apiException = ApiException(
             exception.message,
-            exception,
-            status,
-            ZonedDateTime.now(ZoneId.of("GMT-5")))
+            status)
         return ResponseEntity(apiException, status)
     }
 }
