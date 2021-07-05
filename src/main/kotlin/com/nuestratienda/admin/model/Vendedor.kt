@@ -6,6 +6,8 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
 import javax.validation.constraints.Email
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.Pattern
 
 @Entity
 data class Vendedor (
@@ -13,6 +15,8 @@ data class Vendedor (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
 
+    @Pattern(regexp="[a-zA-Z]")
+    @NotEmpty(message = "Please provide name")
     @Column(nullable = false)
     var nombres: String = "",
 
