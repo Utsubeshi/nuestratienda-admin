@@ -13,8 +13,8 @@ class ApiExceptionHandler {
 
     @ExceptionHandler(value = [Exception::class])
     //@ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun handler(exception: ApiRequestException) : ResponseEntity<Any> {
-        val status = HttpStatus.BAD_REQUEST
+    fun handler(exception: ApiException) : ResponseEntity<Any> {
+        val status = exception.httpStatus
         val apiException = ApiException(
             exception.message,
             status)

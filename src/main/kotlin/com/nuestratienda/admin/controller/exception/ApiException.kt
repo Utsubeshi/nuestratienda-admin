@@ -7,6 +7,6 @@ import java.time.ZonedDateTime
 class ApiException(
     override val message: String = "",
     val httpStatus: HttpStatus = HttpStatus.BAD_REQUEST
-) : Exception()  {
+) : RuntimeException () {
 
 }
