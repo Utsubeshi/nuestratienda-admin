@@ -47,8 +47,10 @@ open class VendedorService (
     }
 
     fun updateUser(vendedor: Vendedor) {
-        val v = repository.findById(vendedor.id).get()
-        if (v.nombres.isBlank()) return
+        val optionalV = repository.findById(vendedor.id)
+        if (!optionalV.isPresent()) return
+        val v = optionalV.get()
+        //if (v.nombres.isBlank()) return
         repository.updateUser(
           if (vendedor.nombres.isBlank()) v.nombres else vendedor.nombres ,
           if (vendedor.apellidos.isBlank()) v.apellidos else vendedor.apellidos,
