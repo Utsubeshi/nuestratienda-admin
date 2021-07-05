@@ -21,7 +21,7 @@ data class Vendedor (
     @Pattern(regexp="[a-zA-Z]")
     @NotBlank(message = "No se introdujo un nombre")
     @Column(nullable = false)
-    var nombres: String = "",
+    var nombres: String? = "",
 
     @Column(nullable = false)
     var apellidos: String = "",
