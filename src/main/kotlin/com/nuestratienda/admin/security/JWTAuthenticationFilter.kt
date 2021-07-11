@@ -32,6 +32,7 @@ class JWTAuthenticationFilter (
             val creds: Vendedor = ObjectMapper()
                 .readValue(request.inputStream, Vendedor::class.java)
             //debug
+            print(request.inputStream)
             print(creds.correo)
             print(creds.password)
             //debug
