@@ -49,7 +49,7 @@ open class VendedorService (
         }
     }
 
-    fun updateUser(vendedor: Vendedor) {
+    fun updateUser(vendedor: Vendedor): String {
         val optionalV = repository.findById(vendedor.id)
         //if (!optionalV.isPresent()) throw ApiException("User not found", HttpStatus.NOT_FOUND)
         if (!optionalV.isPresent()) throw UserNotFoundException()
@@ -59,6 +59,7 @@ open class VendedorService (
           if (vendedor.nombres.isBlank()) v.nombres else vendedor.nombres ,
           if (vendedor.apellidos.isBlank()) v.apellidos else vendedor.apellidos,
           vendedor.id)
+        return "Datos actualizados"
     }
 
     fun newUserPayment(vendedor: Vendedor): RespuestaCulqui {
