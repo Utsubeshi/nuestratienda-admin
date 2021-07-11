@@ -28,15 +28,13 @@ class JWTAuthenticationFilter (
     override fun attemptAuthentication(
         request: HttpServletRequest,
         response: HttpServletResponse): Authentication {
-        //debug
-        val creds2: Vendedor = ObjectMapper()
-        .readValue(request.inputStream, Vendedor::class.java)
-        creds2.correo.toString()
-        creds2.password.toString()
-        //debug
         return try {
             val creds: Vendedor = ObjectMapper()
                 .readValue(request.inputStream, Vendedor::class.java)
+            //debug
+            print(creds.correo)
+            print(creds.password)
+            //debug
             authManager.authenticate(
                 UsernamePasswordAuthenticationToken(
                     creds.correo,
@@ -44,6 +42,7 @@ class JWTAuthenticationFilter (
                     ArrayList()
                 )
             )
+
         } catch (e: IOException) {
             throw RuntimeException(e)
 
@@ -57,6 +56,7 @@ class JWTAuthenticationFilter (
         authResult: Authentication
     ) {
         //debug
+
         authResult.principal.toString()
         //debug
         val token = JWT.create()

@@ -18,8 +18,8 @@ data class Vendedor (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
 
-    @Pattern(regexp="[a-zA-Z]")
-    @NotBlank(message = "No se introdujo un nombre")
+//    @Pattern(regexp="[a-zA-Z]")
+ //   @NotBlank(message = "No se introdujo un nombre")
     @Column(nullable = false)
     var nombres: String = "",
 

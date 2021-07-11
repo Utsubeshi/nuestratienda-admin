@@ -21,8 +21,7 @@ open class WebSecurity (
     val bCryptPasswordEncoder: BCryptPasswordEncoder): WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
-        http
-            .cors().and()
+        http.cors().and()
             .csrf().disable()
             .authorizeRequests()
             .antMatchers(SIGN_UP_URL).permitAll()
