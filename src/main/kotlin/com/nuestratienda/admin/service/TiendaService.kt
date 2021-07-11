@@ -11,7 +11,7 @@ class TiendaService (
 
     //fun update(tienda: Tienda) = repository.save(tienda)
 
-    fun update(tienda: Tienda) {
+    fun update(tienda: Tienda): String {
         val optionalT = repository.findById(tienda.idTienda)
         if (!optionalT.isPresent()) throw StoreNotFoundException()
         val t = optionalT.get()
@@ -22,6 +22,7 @@ class TiendaService (
             if (tienda.direccion.isBlank()) t.direccion else tienda.direccion,
             if (tienda.color1.isBlank()) t.color1 else tienda.color1,
             if (tienda.color2.isBlank()) t.color2 else tienda.color2)
+        return "Datos actualizados"
     }
 
 //    fun getStoreById(idTienda: Long): Tienda? {
