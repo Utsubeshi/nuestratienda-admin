@@ -30,7 +30,6 @@ class TiendaController (
         } catch (ex: NullPointerException) {
             throw ApiRequestException("oops :3")
         }
-
     }
 
 }
