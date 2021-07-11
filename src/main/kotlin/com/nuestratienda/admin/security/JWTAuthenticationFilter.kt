@@ -28,6 +28,13 @@ class JWTAuthenticationFilter (
     override fun attemptAuthentication(
         request: HttpServletRequest,
         response: HttpServletResponse): Authentication {
+        //debug
+        request.inputStream.toString()
+        val creds2: Vendedor = ObjectMapper()
+        .readValue(request.inputStream, Vendedor::class.java)
+        creds2.correo.toString()
+        creds2.password.toString()
+        //debug
         return try {
             val creds: Vendedor = ObjectMapper()
                 .readValue(request.inputStream, Vendedor::class.java)
@@ -51,7 +58,9 @@ class JWTAuthenticationFilter (
         chain: FilterChain?,
         authResult: Authentication
     ) {
-        print("54")
+        //debug
+        authResult.principal.toString()
+        //debug
         val token = JWT.create()
             .withSubject((authResult.getPrincipal() as Vendedor).correo)
             .withExpiresAt(Date(System.currentTimeMillis() + EXPIRATION_TIME))
@@ -75,7 +84,7 @@ class JWTAuthenticationFilter (
 
 object SecurityConstants {
     const val SECRET = "SECRET_KEY"
-    const val EXPIRATION_TIME: Long = 86400000 //     1440 mins  1 dia
+    const val EXPIRATION_TIME: Long = 86400000 //1440 mins  1 dia
     const val TOKEN_PREFIX = "Bearer "
     const val HEADER_STRING = "Authorization"
     const val SIGN_UP_URL = "/api/vendedor/registro"
