@@ -26,14 +26,12 @@ open class WebSecurity (
             .csrf().disable()
             .authorizeRequests()
             .antMatchers(SIGN_UP_URL).permitAll()
-            .antMatchers("/pusher/auth", "/api/vendedor/login").permitAll()
-
+            .antMatchers("/pusher/auth").permitAll()
             .antMatchers("/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**", "/swagger-ui/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilter(JWTAuthenticationFilter(authenticationManager()))
             .addFilter(JWTAuthorizationFilter(authenticationManager()))
-            //.addFilter(getJWTAuthenticationFilter())
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
