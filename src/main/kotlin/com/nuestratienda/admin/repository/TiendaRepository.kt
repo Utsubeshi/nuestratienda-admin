@@ -19,13 +19,14 @@ interface TiendaRepository : CrudRepository<Tienda, Long> {
             "t.logoUrl = :logoUrl," +
             "t.direccion = :direccion," +
             "t.color1 = :color1," +
-            "t.color2 = :color2")
+            "t.color2 = :color2 where t.idTienda = :id")
     fun updateTienda(@Param(value = "nombre") nombre: String,
                      @Param(value = "detalle") detalle: String,
                      @Param(value = "logoUrl") logoUrl: String,
                      @Param(value = "direccion") direccion: String,
                      @Param(value = "color1") color1: String,
-                     @Param(value = "color2") color2: String)
+                     @Param(value = "color2") color2: String,
+                     @Param(value = "id") id: Long)
 
     fun findAllByOrderByIdTiendaAsc(): MutableIterable<Tienda>
 }

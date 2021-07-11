@@ -22,7 +22,8 @@ class TiendaService (
             if (tienda.logoUrl.isBlank()) t.logoUrl else tienda.logoUrl,
             if (tienda.direccion.isBlank()) t.direccion else tienda.direccion,
             if (tienda.color1.isBlank()) t.color1 else tienda.color1,
-            if (tienda.color2.isBlank()) t.color2 else tienda.color2)
+            if (tienda.color2.isBlank()) t.color2 else tienda.color2,
+            tienda.idTienda)
         return "Datos actualizados"
     }
 
