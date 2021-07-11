@@ -29,10 +29,8 @@ class JWTAuthenticationFilter (
         request: HttpServletRequest,
         response: HttpServletResponse): Authentication {
         return try {
-            println("32")
             val creds: Vendedor = ObjectMapper()
                 .readValue(request.inputStream, Vendedor::class.java)
-            println("35")
             authManager.authenticate(
                 UsernamePasswordAuthenticationToken(
                     creds.correo,
@@ -53,10 +51,12 @@ class JWTAuthenticationFilter (
         chain: FilterChain?,
         authResult: Authentication
     ) {
+        print("54")
         val token = JWT.create()
             .withSubject((authResult.getPrincipal() as Vendedor).correo)
             .withExpiresAt(Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .sign(Algorithm.HMAC512(SECRET.toByteArray()))
+        print(token.toString())
         //val body: String = (authResult.getPrincipal() as Vendedor).correo.toString() + " " + token
         val body: String = (authResult.getPrincipal() as Vendedor).correo.toString()
         val id: String = (authResult.getPrincipal() as Vendedor).id.toString()
