@@ -75,7 +75,7 @@ class JWTAuthenticationFilter (
 
 object SecurityConstants {
     const val SECRET = "SECRET_KEY"
-    const val EXPIRATION_TIME: Long = 86400000 // 1440 mins  1 dia
+    const val EXPIRATION_TIME: Long = 86400000 //     1440 mins  1 dia
     const val TOKEN_PREFIX = "Bearer "
     const val HEADER_STRING = "Authorization"
     const val SIGN_UP_URL = "/api/vendedor/registro"
