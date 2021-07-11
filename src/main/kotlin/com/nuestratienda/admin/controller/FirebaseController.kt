@@ -17,9 +17,9 @@ class FirebaseController (
         return ResponseEntity(dbFirebase, HttpStatus.OK)
     }
 
-    @GetMapping("/{idTienda}", produces = arrayOf("application/json"))
-    fun getFirebaaseData(@PathVariable("idTIenda") idTienda: Long) : ResponseEntity<Any> {
-        val firebase = service.getFirebaseById(idTienda) ?: return  ResponseEntity(HttpStatus.NOT_FOUND)
+    @GetMapping("/{idFirebase}", produces = arrayOf("application/json"))
+    fun getFirebaaseData(@PathVariable("idFirebase") idFirebase: Long) : ResponseEntity<Any> {
+        val firebase = service.getFirebaseById(idFirebase) ?: return  ResponseEntity(HttpStatus.NOT_FOUND)
         return ResponseEntity(firebase, HttpStatus.OK)
     }
 }
