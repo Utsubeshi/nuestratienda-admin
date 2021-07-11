@@ -30,9 +30,9 @@ open class WebSecurity (
             .antMatchers("/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**", "/swagger-ui/**").permitAll()
             .anyRequest().authenticated()
             .and()
-            //.addFilter(JWTAuthenticationFilter(authenticationManager()))
+            .addFilter(JWTAuthenticationFilter(authenticationManager()))
             .addFilter(JWTAuthorizationFilter(authenticationManager()))
-            .addFilter(getJWTAuthenticationFilter())
+            //.addFilter(getJWTAuthenticationFilter())
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
@@ -40,12 +40,6 @@ open class WebSecurity (
         auth?.userDetailsService(vendedorService)?.passwordEncoder(bCryptPasswordEncoder)
     }
 
-    @Bean
-    fun getJWTAuthenticationFilter(): JWTAuthenticationFilter? {
-        val filter = JWTAuthenticationFilter(authenticationManager())
-        filter.setFilterProcessesUrl("/api/vendedor/login")
-        return filter
-    }
 
     @Bean
     open fun corsConfigurationSource(): CorsConfigurationSource {
