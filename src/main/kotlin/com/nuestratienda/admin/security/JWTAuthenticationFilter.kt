@@ -29,16 +29,8 @@ class JWTAuthenticationFilter (
         request: HttpServletRequest,
         response: HttpServletResponse): Authentication {
         return try {
-            print("asdf")
             val creds: Vendedor = ObjectMapper()
                 .readValue(request.inputStream, Vendedor::class.java)
-            //debug
-            print("1234")
-            print(request.inputStream)
-            print(creds.correo)
-            print(creds.password)
-            print("qwerty")
-            //debug
             authManager.authenticate(
                 UsernamePasswordAuthenticationToken(
                     creds.correo,
@@ -46,10 +38,8 @@ class JWTAuthenticationFilter (
                     ArrayList()
                 )
             )
-
         } catch (e: IOException) {
             throw RuntimeException(e)
-
         }
     }
 
@@ -59,15 +49,10 @@ class JWTAuthenticationFilter (
         chain: FilterChain?,
         authResult: Authentication
     ) {
-        //debug
-
-        authResult.principal.toString()
-        //debug
         val token = JWT.create()
             .withSubject((authResult.getPrincipal() as Vendedor).correo)
             .withExpiresAt(Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .sign(Algorithm.HMAC512(SECRET.toByteArray()))
-        print(token.toString())
         //val body: String = (authResult.getPrincipal() as Vendedor).correo.toString() + " " + token
         val body: String = (authResult.getPrincipal() as Vendedor).correo.toString()
         val id: String = (authResult.getPrincipal() as Vendedor).id.toString()
