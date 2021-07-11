@@ -29,12 +29,12 @@ class JWTAuthenticationFilter (
         request: HttpServletRequest,
         response: HttpServletResponse): Authentication {
         return try {
+            print("asdf")
             val creds: Vendedor = ObjectMapper()
                 .readValue(request.inputStream, Vendedor::class.java)
             //debug
-            print("asdf")
-            print(request.inputStream)
             print("1234")
+            print(request.inputStream)
             print(creds.correo)
             print(creds.password)
             print("qwerty")
