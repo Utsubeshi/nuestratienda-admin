@@ -14,7 +14,7 @@ class FirebaseController (
     @PostMapping("/guardar", produces = arrayOf("application/json"))
     fun saveFirebaseData(@RequestBody firebase: Firebase): ResponseEntity<Any> {
         val dbFirebase = service.saveFirebase(firebase) ?: return ResponseEntity("Registro fallido", HttpStatus.NOT_FOUND)
-        return ResponseEntity(firebase, HttpStatus.OK)
+        return ResponseEntity(dbFirebase, HttpStatus.OK)
     }
 
     @GetMapping("/{idTienda}", produces = arrayOf("application/json"))

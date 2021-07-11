@@ -28,7 +28,6 @@ class VendedorController (
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
 
-    @ExceptionHandler
     @GetMapping( "/{id}", produces = arrayOf("application/json"))
     fun getUserById(@PathVariable id: Long): ResponseEntity<Any> {
         val vendedor = service.getUserById(id)
