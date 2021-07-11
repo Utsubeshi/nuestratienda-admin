@@ -32,4 +32,9 @@ class TiendaController (
         }
     }
 
+    @GetMapping("/listar", produces = arrayOf("application/json"))
+    fun getVendedores(): ResponseEntity<Any> {
+        return ResponseEntity(service.getTiendas(), HttpStatus.OK)
+    }
+
 }

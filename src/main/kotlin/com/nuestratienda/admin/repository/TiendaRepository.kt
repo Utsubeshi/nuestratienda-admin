@@ -26,4 +26,6 @@ interface TiendaRepository : CrudRepository<Tienda, Long> {
                      @Param(value = "direccion") direccion: String,
                      @Param(value = "color1") color1: String,
                      @Param(value = "color2") color2: String)
+
+    fun findAllByOrderByIdTiendaAsc(): MutableIterable<Tienda>
 }

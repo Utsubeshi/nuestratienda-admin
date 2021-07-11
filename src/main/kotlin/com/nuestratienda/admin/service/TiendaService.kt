@@ -2,6 +2,7 @@ package com.nuestratienda.admin.service
 
 import com.nuestratienda.admin.controller.exception.StoreNotFoundException
 import com.nuestratienda.admin.model.Tienda
+import com.nuestratienda.admin.model.Vendedor
 import com.nuestratienda.admin.repository.TiendaRepository
 import org.springframework.stereotype.Service
 
@@ -33,5 +34,10 @@ class TiendaService (
 
     fun getStoreById(idTienda: Long): Tienda? {
         return repository.findById(idTienda).get()
+    }
+
+    fun getTiendas(): MutableIterable<Tienda> {
+        //val vendodores = repository.findAll()
+        return repository.findAllByOrderByIdTiendaAsc()
     }
 }
