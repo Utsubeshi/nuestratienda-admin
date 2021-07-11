@@ -29,7 +29,6 @@ class JWTAuthenticationFilter (
         request: HttpServletRequest,
         response: HttpServletResponse): Authentication {
         //debug
-        request.inputStream.toString()
         val creds2: Vendedor = ObjectMapper()
         .readValue(request.inputStream, Vendedor::class.java)
         creds2.correo.toString()
@@ -46,7 +45,6 @@ class JWTAuthenticationFilter (
                 )
             )
         } catch (e: IOException) {
-            println("error")
             throw RuntimeException(e)
 
         }
