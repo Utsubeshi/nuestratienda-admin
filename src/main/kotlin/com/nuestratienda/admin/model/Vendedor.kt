@@ -18,8 +18,6 @@ data class Vendedor (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
 
-//    @Pattern(regexp="[a-zA-Z]")
- //   @NotBlank(message = "No se introdujo un nombre")
     @Column(nullable = false)
     var nombres: String = "",
 
@@ -33,11 +31,11 @@ data class Vendedor (
     @Email
     var correo: String = "",
 
-    @OneToOne(cascade = arrayOf(CascadeType.MERGE))
+    @OneToOne(cascade = arrayOf(CascadeType.ALL))
     @JoinColumn(name = "idTienda")
     var tienda: Tienda = Tienda(),
 
-    @OneToOne(cascade = arrayOf(CascadeType.MERGE))
+    @OneToOne(cascade = arrayOf(CascadeType.ALL))
     @JoinColumn(name = "idSuscripcion")
     var suscripcion: Suscripcion = Suscripcion()
     ) : UserDetails {
