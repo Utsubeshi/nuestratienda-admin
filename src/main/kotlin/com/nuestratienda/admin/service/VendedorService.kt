@@ -33,6 +33,10 @@ open class VendedorService (
         return vendedor
     }
 
+    fun deleteUser(id: Long) {
+        repository.deleteById(id)
+    }
+
     @Transactional
     open fun saveNewUser(vendedor: Vendedor): String {
         val v: Vendedor? = repository.findByCorreo(vendedor.correo)
