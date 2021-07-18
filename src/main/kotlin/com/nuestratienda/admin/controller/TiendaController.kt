@@ -21,7 +21,8 @@ class TiendaController (
     @PostMapping("/actualizar", produces = arrayOf("application/json"))
     fun update(@RequestBody tienda: Tienda): ResponseEntity<Any> {
         val mensaje : MutableMap< String, String> = HashMap()
-        return ResponseEntity(mensaje.put("mensaje", service.update(tienda)), HttpStatus.OK)
+        mensaje.put("mensaje", service.update(tienda))
+        return ResponseEntity(mensaje, HttpStatus.OK)
     }
 
     @GetMapping("/{idTienda}", produces = arrayOf("application/json"))
