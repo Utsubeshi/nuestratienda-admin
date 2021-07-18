@@ -5,6 +5,7 @@ import com.nuestratienda.admin.model.Tienda
 import com.nuestratienda.admin.model.Vendedor
 import com.nuestratienda.admin.repository.TiendaRepository
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class TiendaService (
@@ -33,8 +34,8 @@ class TiendaService (
 //       return null
 //    }
 
-    fun getStoreById(idTienda: Long): Tienda? {
-        return repository.findById(idTienda).get()
+    fun getStoreById(idTienda: Long): Optional<Tienda> {
+        return repository.findById(idTienda)
     }
 
     fun getTiendas(): MutableIterable<Tienda> {

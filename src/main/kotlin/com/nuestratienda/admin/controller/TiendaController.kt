@@ -1,6 +1,7 @@
 package com.nuestratienda.admin.controller
 
 import com.nuestratienda.admin.controller.exception.ApiRequestException
+import com.nuestratienda.admin.controller.exception.StoreNotFoundException
 import com.nuestratienda.admin.model.Tienda
 import com.nuestratienda.admin.service.TiendaService
 import org.springframework.http.HttpStatus
@@ -19,14 +20,17 @@ class TiendaController (
 
     @PostMapping("/actualizar", produces = arrayOf("application/json"))
     fun update(@RequestBody tienda: Tienda): ResponseEntity<Any> {
-        return ResponseEntity(service.update(tienda), HttpStatus.OK)
+        val mensaje : MutableMap< String, String> = HashMap()
+        return ResponseEntity(mensaje.put("mensaje", service.update(tienda)), HttpStatus.OK)
     }
 
     @GetMapping("/{idTienda}", produces = arrayOf("application/json"))
     fun getStoreById(@PathVariable("idTienda") idTienda: Long) : ResponseEntity<Any> {
         try {
-            val tienda: Tienda = service.getStoreById(idTienda) ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
-            return ResponseEntity(tienda, HttpStatus.OK)
+            val tienda = service.getStoreById(idTienda)// ?: return ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
+            if (!tienda.isPresent()) return  ResponseEntity("Registro no encontrado",HttpStatus.NOT_FOUND)
+            val t = tienda.get()
+            return ResponseEntity(t, HttpStatus.OK)
         } catch (ex: NullPointerException) {
             throw ApiRequestException("oops :3")
         }

@@ -33,10 +33,6 @@ open class VendedorService (
         return vendedor
     }
 
-    fun deleteUser(id: Long) {
-        repository.deleteById(id)
-    }
-
     @Transactional
     open fun saveNewUser(vendedor: Vendedor): String {
         val v: Vendedor? = repository.findByCorreo(vendedor.correo)
@@ -125,6 +121,11 @@ open class VendedorService (
     }
 
     fun update(vendedor: Vendedor) = repository.save(vendedor)
+
+    //TODO revisar las formas de desactivacion de cuenta
+    fun deleteUser(id: Long) {
+        repository.deleteById(id)
+    }
 }
 
 class RespuestaCulqui(
