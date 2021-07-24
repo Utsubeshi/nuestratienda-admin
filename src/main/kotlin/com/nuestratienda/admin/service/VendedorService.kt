@@ -1,12 +1,11 @@
 package com.nuestratienda.admin.service
 
 import com.google.gson.Gson
-import com.nuestratienda.admin.controller.exception.ApiException
 import com.nuestratienda.admin.controller.exception.UserNotFoundException
 import com.nuestratienda.admin.model.*
+import com.nuestratienda.admin.repository.PasswordResetTokenRepository
 import com.nuestratienda.admin.repository.SuscripcionRepository
 import com.nuestratienda.admin.repository.VendedorRepository
-import org.springframework.http.HttpStatus
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -14,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
+import javax.servlet.http.HttpServletRequest
 import kotlin.collections.HashMap
 
 @Service
@@ -21,7 +21,9 @@ open class VendedorService (
     var bCryptPasswordEncoder: BCryptPasswordEncoder,
     var repository: VendedorRepository,
     var suscripcionRepository: SuscripcionRepository,
-    val culqiAPI: CulqiAPI
+    var passwordResetTokenRepository: PasswordResetTokenRepository,
+    val culqiAPI: CulqiAPI,
+    val emailservice: EmailService
         ) : UserDetailsService{
 
     override fun loadUserByUsername(email: String?): UserDetails {
@@ -121,6 +123,21 @@ open class VendedorService (
         if (!optionalV.isPresent) throw UserNotFoundException()
         repository.updateAccountState(vendedor.id, vendedor.estaActivo)
         if (vendedor.estaActivo) return ACTIVARCUENTA else return DESACTIVARCUENTA
+    }
+
+    fun resetPassword(email: String, request: HttpServletRequest): String {
+        val v = repository.findByCorreo(email) ?: throw UserNotFoundException()
+        val token = UUID.randomUUID().toString()
+        createPasswordResetTokenForUser(v, token)
+        emailservice.sendMail(emailservice.createMailResetPassword(email, "Resetear contraseña", token, v, request))
+        return "Hemos enviado un correo para resetear la contraseña"
+    }
+
+    fun createPasswordResetTokenForUser(user: Vendedor, token: String) {
+        val myToken = PasswordResetToken(token = token, user = user)
+        println(myToken.toString())
+        passwordResetTokenRepository.save(myToken)
+
     }
 
     companion object {

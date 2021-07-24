@@ -2,17 +2,12 @@ package com.nuestratienda.admin.controller
 
 import com.nuestratienda.admin.model.Suscripcion
 import com.nuestratienda.admin.model.Vendedor
-import com.nuestratienda.admin.repository.VendedorRepository
 import com.nuestratienda.admin.service.SuscripcionService
 import com.nuestratienda.admin.service.VendedorService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.net.URI
-import javax.validation.Valid
-import javax.websocket.server.PathParam
-import kotlin.jvm.Throws
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 //@CrossOrigin(origins = arrayOf("*"), methods= arrayOf(RequestMethod.GET, RequestMethod.POST))
@@ -64,6 +59,13 @@ class VendedorController (
         val mensaje = hashMapOf<String, String>()
         mensaje.put(MENSAJE, service.updateAccountState(vendedor))
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
+    }
+
+    @PostMapping("/resetpassword")
+    fun resetPassword(request: HttpServletRequest, @RequestBody email: String) {
+        val mensaje = hashMapOf<String, String>()
+        mensaje.put(MENSAJE, service.resetPassword(email, request))
+
     }
 
     companion object {
