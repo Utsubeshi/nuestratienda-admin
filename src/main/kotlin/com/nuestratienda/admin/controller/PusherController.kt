@@ -16,11 +16,17 @@ class PusherController {
 
     @PostMapping("/auth", consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE], produces = ["application/json"])
     fun update(req: PusherRequest): ResponseEntity<Any> {
-        val pusher = Pusher("1158630", "7357430a418c50d7acec", "0804eeecd910f7bb9c9d")
+        val pusher = Pusher(APP_ID, KEY, SECRET)
         val socketId = req.socket_id
         val channel = req.channel_name
         val auth = pusher.authenticate(socketId, channel)
         System.out.println(auth)
         return ResponseEntity(auth, HttpStatus.OK)
+    }
+
+    companion object {
+        val APP_ID = "1158630"
+        val KEY = "7357430a418c50d7acec"
+        val SECRET = "0804eeecd910f7bb9c9d"
     }
 }

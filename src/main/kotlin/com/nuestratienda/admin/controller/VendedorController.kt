@@ -54,7 +54,9 @@ class VendedorController (
 
     @PostMapping("/actualizar")
     fun updateVendedor(@RequestBody vendedor: Vendedor): ResponseEntity<Any> {
-        return ResponseEntity<Any>(service.updateUser(vendedor), HttpStatus.OK)
+        val mensaje = hashMapOf<String, String>()
+        mensaje.put(MENSAJE, service.updateUser(vendedor))
+        return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
 
     @PostMapping("/suspender")
