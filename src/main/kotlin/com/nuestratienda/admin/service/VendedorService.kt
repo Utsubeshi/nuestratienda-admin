@@ -3,10 +3,7 @@ package com.nuestratienda.admin.service
 import com.google.gson.Gson
 import com.nuestratienda.admin.controller.exception.ApiException
 import com.nuestratienda.admin.controller.exception.UserNotFoundException
-import com.nuestratienda.admin.model.PaymentDetails
-import com.nuestratienda.admin.model.Suscripcion
-import com.nuestratienda.admin.model.Tienda
-import com.nuestratienda.admin.model.Vendedor
+import com.nuestratienda.admin.model.*
 import com.nuestratienda.admin.repository.SuscripcionRepository
 import com.nuestratienda.admin.repository.VendedorRepository
 import org.springframework.http.HttpStatus
@@ -52,7 +49,7 @@ open class VendedorService (
     fun updateUser(vendedor: Vendedor): String {
         val optionalV = repository.findById(vendedor.id)
         //if (!optionalV.isPresent()) throw ApiException("User not found", HttpStatus.NOT_FOUND)
-        if (!optionalV.isPresent()) throw UserNotFoundException()
+        if (!optionalV.isPresent) throw UserNotFoundException()
         val v = optionalV.get()
         //if (v.nombres.isBlank()) return
         repository.updateUser(
@@ -120,20 +117,11 @@ open class VendedorService (
         return repository.findAllByOrderByIdAsc()
     }
 
-    fun update(vendedor: Vendedor) = repository.save(vendedor)
-
     //TODO revisar las formas de desactivacion de cuenta
-    fun deleteUser(id: Long) {
-        repository.deleteById(id)
+    fun updateAccountState(vendedor: Vendedor) {
+        val optionalV = repository.findById(vendedor.id)
+        if (!optionalV.isPresent) throw UserNotFoundException()
+        repository.updateAccountState(vendedor.id, vendedor.estaActivo)
     }
 }
 
-class RespuestaCulqui(
-    var isSuccessful: Boolean = false,
-    var mensaje: String = "",
-    var id: String = ""
-){
-    override fun toString(): String {
-        return "RespuestaCulqui(isSuccessful=$isSuccessful, mensaje='$mensaje', id='$id')"
-    }
-}

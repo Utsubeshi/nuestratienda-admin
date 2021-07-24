@@ -57,8 +57,8 @@ class VendedorController (
         return ResponseEntity<Any>(service.updateUser(vendedor), HttpStatus.OK)
     }
 
-    @DeleteMapping("/eliminar/{id}")
-    fun deleteVendedor(@PathVariable id: Long) {
-        service.deleteUser(id)
+    @PostMapping("/suspender/{id}")
+    fun deleteVendedor(@RequestBody vendedor: Vendedor) {
+        //service.deleteUser(id)
     }
 }

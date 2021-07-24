@@ -22,6 +22,13 @@ interface VendedorRepository : CrudRepository<Vendedor, Long> {
 
     fun findAllByOrderByIdAsc(): MutableIterable<Vendedor>
 
+    @Modifying
+    @Query("update Vendedor v set v.estaActivo = :estaActivo where v.id = :id")
+    fun updateAccountState (@Param(value = "id") id: Long,
+                            @Param(value = "estaActivo") estaActivo: Boolean) {
+
+    }
+
 
 }
 

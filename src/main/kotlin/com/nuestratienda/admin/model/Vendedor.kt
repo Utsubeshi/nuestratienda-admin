@@ -31,6 +31,8 @@ data class Vendedor (
     @Email
     var correo: String = "",
 
+    var estaActivo: Boolean = true,
+
     @OneToOne(cascade = arrayOf(CascadeType.ALL))
     @JoinColumn(name = "idTienda")
     var tienda: Tienda = Tienda(),
@@ -63,5 +65,5 @@ data class Vendedor (
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     override fun isCredentialsNonExpired(): Boolean = true
 
-    override fun isEnabled(): Boolean = true
+    override fun isEnabled(): Boolean = estaActivo
 }
