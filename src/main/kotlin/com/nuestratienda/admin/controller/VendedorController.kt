@@ -58,7 +58,7 @@ class VendedorController (
     }
 
     @PostMapping("/suspender/{id}")
-    fun deleteVendedor(@RequestBody vendedor: Vendedor) {
-        //service.deleteUser(id)
+    fun updateVendedorStatus(@RequestBody vendedor: Vendedor) {
+        service.updateAccountState(vendedor)
     }
 }
