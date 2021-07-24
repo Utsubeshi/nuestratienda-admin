@@ -117,7 +117,6 @@ open class VendedorService (
         return repository.findAllByOrderByIdAsc()
     }
 
-    //TODO revisar las formas de desactivacion de cuenta
     fun updateAccountState(vendedor: Vendedor) {
         val optionalV = repository.findById(vendedor.id)
         if (!optionalV.isPresent) throw UserNotFoundException()

@@ -57,7 +57,7 @@ class VendedorController (
         return ResponseEntity<Any>(service.updateUser(vendedor), HttpStatus.OK)
     }
 
-    @PostMapping("/suspender/{id}")
+    @PostMapping("/suspender")
     fun updateVendedorStatus(@RequestBody vendedor: Vendedor) {
         service.updateAccountState(vendedor)
     }
