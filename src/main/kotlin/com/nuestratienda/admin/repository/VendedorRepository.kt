@@ -25,9 +25,7 @@ interface VendedorRepository : CrudRepository<Vendedor, Long> {
     @Modifying
     @Query("update Vendedor v set v.estaActivo = :estaActivo where v.id = :id")
     fun updateAccountState (@Param(value = "id") id: Long,
-                            @Param(value = "estaActivo") estaActivo: Boolean) {
-
-    }
+                            @Param(value = "estaActivo") estaActivo: Boolean)
 
 
 }

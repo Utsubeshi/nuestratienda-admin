@@ -34,7 +34,7 @@ open class VendedorService (
     open fun saveNewUser(vendedor: Vendedor): String {
         val v: Vendedor? = repository.findByCorreo(vendedor.correo)
         if (v != null){
-            return "El correo ya esta registrado"
+            return USUARIOEXISTE
         } else {
             val apiResponse = newUserPayment(vendedor)
             if (apiResponse.isSuccessful) {
@@ -56,7 +56,7 @@ open class VendedorService (
           if (vendedor.nombres.isBlank()) v.nombres else vendedor.nombres ,
           if (vendedor.apellidos.isBlank()) v.apellidos else vendedor.apellidos,
           vendedor.id)
-        return "Datos actualizados"
+        return DATOSACTUALIZADOS
     }
 
     fun newUserPayment(vendedor: Vendedor): RespuestaCulqui {
@@ -77,7 +77,7 @@ open class VendedorService (
             respuestaCulqui.mensaje = map["user_message"].toString()
         } else {
             respuestaCulqui.isSuccessful = true
-            respuestaCulqui.mensaje = "Se efectuo el pago con exito."
+            respuestaCulqui.mensaje = PAGOEXITOSO
         }
         return respuestaCulqui
     }
@@ -87,21 +87,20 @@ open class VendedorService (
         val apiResponse = paySuscripcion(suscripcion)
         if (apiResponse.isSuccessful) {
             suscripcionRepository.save(suscripcion)
-            return "Suscripcion renovada"
+            return RENOVARSUB
         }
         return apiResponse.mensaje
     }
 
     fun paySuscripcion(suscripcion: Suscripcion): RespuestaCulqui {
         val payment = PaymentDetails(
-            amount = "39900",
+            amount = PRECIOPLAN ,
             currency_code = "PEN",
             email = "renovacion@nta.com",
             source_id = suscripcion.token
         )
         return respuestaCulqui(payment)
     }
-
 
     fun getUserById(id: Long): Vendedor {
         var vendedor = Vendedor()
@@ -117,10 +116,21 @@ open class VendedorService (
         return repository.findAllByOrderByIdAsc()
     }
 
-    fun updateAccountState(vendedor: Vendedor) {
+    fun updateAccountState(vendedor: Vendedor): String {
         val optionalV = repository.findById(vendedor.id)
         if (!optionalV.isPresent) throw UserNotFoundException()
         repository.updateAccountState(vendedor.id, vendedor.estaActivo)
+        if (vendedor.estaActivo) return ACTIVARCUENTA else return DESACTIVARCUENTA
+    }
+
+    companion object {
+        val ACTIVARCUENTA = "Cuenta Activada"
+        val DESACTIVARCUENTA = "Cuenta Desactivada"
+        val RENOVARSUB = "Suscripcion renovada"
+        val PRECIOPLAN = "39900"
+        val PAGOEXITOSO = "Se efectuo el pago con exito."
+        val DATOSACTUALIZADOS = "Datos actualizados"
+        val USUARIOEXISTE = "El correo ya esta registrado"
     }
 }
 

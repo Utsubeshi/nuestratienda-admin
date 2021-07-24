@@ -43,7 +43,7 @@ class VendedorController (
     @PostMapping("/renovar", produces = arrayOf("application/json"))
     fun renewSuscripcion(@RequestBody suscripcion: Suscripcion): ResponseEntity<Any>{
         val mensaje: MutableMap<String, String> = HashMap()
-        mensaje.put("mensaje", service.renewSuscripcion(suscripcion))
+        mensaje.put(MENSAJE, service.renewSuscripcion(suscripcion))
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
 
@@ -58,7 +58,13 @@ class VendedorController (
     }
 
     @PostMapping("/suspender")
-    fun updateVendedorStatus(@RequestBody vendedor: Vendedor) {
-        service.updateAccountState(vendedor)
+    fun updateVendedorStatus(@RequestBody vendedor: Vendedor): ResponseEntity<Any> {
+        val mensaje = hashMapOf<String, String>()
+        mensaje.put(MENSAJE, service.updateAccountState(vendedor))
+        return ResponseEntity<Any>(mensaje, HttpStatus.OK)
+    }
+
+    companion object {
+        val MENSAJE = "mensaje"
     }
 }
