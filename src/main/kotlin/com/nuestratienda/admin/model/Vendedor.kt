@@ -31,6 +31,7 @@ data class Vendedor (
     @Email
     var correo: String = "",
 
+    @Column
     var estaActivo: Boolean = true,
 
     @OneToOne(cascade = arrayOf(CascadeType.ALL))
