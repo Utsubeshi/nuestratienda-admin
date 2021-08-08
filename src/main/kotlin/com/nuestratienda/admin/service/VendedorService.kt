@@ -3,7 +3,6 @@ package com.nuestratienda.admin.service
 import com.google.gson.Gson
 import com.nuestratienda.admin.controller.exception.UserNotFoundException
 import com.nuestratienda.admin.model.*
-import com.nuestratienda.admin.repository.PasswordResetTokenRepository
 import com.nuestratienda.admin.repository.SuscripcionRepository
 import com.nuestratienda.admin.repository.VendedorRepository
 import org.springframework.security.core.userdetails.UserDetails
@@ -21,7 +20,7 @@ open class VendedorService (
     var bCryptPasswordEncoder: BCryptPasswordEncoder,
     var repository: VendedorRepository,
     var suscripcionRepository: SuscripcionRepository,
-    var passwordResetTokenRepository: PasswordResetTokenRepository,
+    //var passwordResetTokenRepository: PasswordResetTokenRepository,
     val culqiAPI: CulqiAPI,
     val emailservice: EmailService
         ) : UserDetailsService{
@@ -125,20 +124,20 @@ open class VendedorService (
         if (vendedor.estaActivo) return ACTIVARCUENTA else return DESACTIVARCUENTA
     }
 
-    fun resetPassword(email: String, request: HttpServletRequest): String {
-        val v = repository.findByCorreo(email) ?: throw UserNotFoundException()
-        val token = UUID.randomUUID().toString()
-        createPasswordResetTokenForUser(v, token)
-        emailservice.sendMail(emailservice.createMailResetPassword(email, "Resetear contraseña", token, v, request))
-        return "Hemos enviado un correo para resetear la contraseña"
-    }
-
-    fun createPasswordResetTokenForUser(user: Vendedor, token: String) {
-        val myToken = PasswordResetToken(token = token, user = user)
-        println(myToken.toString())
-        passwordResetTokenRepository.save(myToken)
-
-    }
+//    fun resetPassword(email: String, request: HttpServletRequest): String {
+//        val v = repository.findByCorreo(email) ?: throw UserNotFoundException()
+//        val token = UUID.randomUUID().toString()
+//        createPasswordResetTokenForUser(v, token)
+//        emailservice.sendMail(emailservice.createMailResetPassword(email, "Resetear contraseña", token, v, request))
+//        return "Hemos enviado un correo para resetear la contraseña"
+//    }
+//
+//    fun createPasswordResetTokenForUser(user: Vendedor, token: String) {
+//        val myToken = PasswordResetToken(token = token, user = user)
+//        println(myToken.toString())
+//        passwordResetTokenRepository.save(myToken)
+//
+//    }
 
     companion object {
         val ACTIVARCUENTA = "Cuenta Activada"

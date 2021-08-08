@@ -61,12 +61,12 @@ class VendedorController (
         return ResponseEntity<Any>(mensaje, HttpStatus.OK)
     }
 
-    @PostMapping("/resetpassword")
-    fun resetPassword(request: HttpServletRequest, @RequestBody email: String) {
-        val mensaje = hashMapOf<String, String>()
-        mensaje.put(MENSAJE, service.resetPassword(email, request))
-
-    }
+//    @PostMapping("/resetpassword")
+//    fun resetPassword(request: HttpServletRequest, @RequestBody email: String) {
+//        val mensaje = hashMapOf<String, String>()
+//        mensaje.put(MENSAJE, service.resetPassword(email, request))
+//
+//    }
 
     companion object {
         val MENSAJE = "mensaje"
