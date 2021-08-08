@@ -21,8 +21,8 @@ open class VendedorService (
     var repository: VendedorRepository,
     var suscripcionRepository: SuscripcionRepository,
     //var passwordResetTokenRepository: PasswordResetTokenRepository,
-    val culqiAPI: CulqiAPI,
-    val emailservice: EmailService
+    val culqiAPI: CulqiAPI
+    //val emailservice: EmailService
         ) : UserDetailsService{
 
     override fun loadUserByUsername(email: String?): UserDetails {
